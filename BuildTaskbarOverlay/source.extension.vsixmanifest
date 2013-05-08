@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Vsix xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2010">
+  <Identifier Id="b5963c5d-2ceb-49a5-8dd1-dee8f3bb1e81">
+    <Name>Build Taskbar Overlay</Name>
+    <Author>Dean Camera</Author>
+    <Version>0.70</Version>
+    <Description xml:space="preserve">Build status overlay on the Windows 7 Taskbar, visually showing when builds are in progress, completed successfully or failed.</Description>
+    <Locale>1033</Locale>
+    <MoreInfoUrl>http://www.fourwalledcubicle.com</MoreInfoUrl>
+    <License>License.txt</License>
+    <Icon>Preview.png</Icon>
+    <PreviewImage>Preview.png</PreviewImage>
+    <InstalledByMsi>false</InstalledByMsi>
+    <SupportedProducts>
+      <IsolatedShell Version="6.1">AtmelStudio</IsolatedShell>
+      <IsolatedShell Version="6.0">AtmelStudio</IsolatedShell>
+    </SupportedProducts>
+    <SupportedFrameworkRuntimeEdition MinVersion="4.0" MaxVersion="4.0" />
+  </Identifier>
+  <References />
+  <Content>
+    <VsPackage>|%CurrentProject%;PkgdefProjectOutputGroup|</VsPackage>
+  </Content>
+</Vsix>
