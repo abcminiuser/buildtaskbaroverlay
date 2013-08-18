@@ -15,6 +15,7 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
     public sealed class BuildTaskbarOverlayPackage : Package
     {
         private readonly DTE mDTE;
+        private readonly SolutionEvents mSolutionEvents;
         private readonly BuildEvents mBuildEvents;
         private readonly TaskbarManager mWindowsTaskBar;
 
@@ -29,6 +30,11 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
                 mWindowsTaskBar = TaskbarManager.Instance;
 
                 mDTE = Package.GetGlobalService(typeof(DTE)) as DTE;
+
+                mSolutionEvents = mDTE.Events.SolutionEvents;
+                mSolutionEvents.AfterClosing += new _dispSolutionEvents_AfterClosingEventHandler(mSolutionEvents_AfterClosing);
+                mSolutionEvents.ProjectAdded += new _dispSolutionEvents_ProjectAddedEventHandler(mSolutionEvents_ProjectAltered);
+                mSolutionEvents.ProjectRemoved += new _dispSolutionEvents_ProjectRemovedEventHandler(mSolutionEvents_ProjectAltered);
 
                 mBuildEvents = mDTE.Events.BuildEvents;
                 mBuildEvents.OnBuildBegin += new _dispBuildEvents_OnBuildBeginEventHandler(mBuildEvents_OnBuildBegin);
@@ -50,6 +56,22 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
             {
                 mSettings = new OptionsPage();
             }
+        }
+
+        void ResetOverlay()
+        {
+            mWindowsTaskBar.SetProgressState(TaskbarProgressBarState.NoProgress);
+            mWindowsTaskBar.SetOverlayIcon(null, "");
+        }
+
+        void mSolutionEvents_AfterClosing()
+        {
+            ResetOverlay();
+        }
+
+        void mSolutionEvents_ProjectAltered(Project Project)
+        {
+            ResetOverlay();
         }
 
         void mBuildEvents_OnBuildBegin(vsBuildScope Scope, vsBuildAction Action)
