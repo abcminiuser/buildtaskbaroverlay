@@ -47,6 +47,21 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
             return null;
         }
 
+        public static Icon IconBuildWarning(IconThemes theme)
+        {
+            switch (theme)
+            {
+                case IconThemes.ICON_THEME_1:
+                    return Resources.BuildWarning;
+                case IconThemes.ICON_THEME_2:
+                    return Resources.BuildWarning;
+                case IconThemes.ICON_THEME_3:
+                    return Resources.BuildWarning;
+            }
+
+            return null;
+        }
+
         public static Icon IconBuildFail(IconThemes theme)
         {
             switch (theme)

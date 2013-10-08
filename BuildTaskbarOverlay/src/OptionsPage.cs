@@ -6,8 +6,8 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
     public class OptionsPage : DialogPage
     {
         private IconTheme.IconThemes mIconTheme = IconTheme.IconThemes.ICON_THEME_1;
-
         private bool mUseProgressBar = true;
+        private bool mShowWarnings = true;
 
         [DisplayName("Icon Overlay Theme")]
         [Description("Select the icon overlay theme to use on the taskbar while building.")]
@@ -25,6 +25,13 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
             get { return mUseProgressBar; }
             set { mUseProgressBar = value; }
         }
-    
+
+        [DisplayName("Show Warnings")]
+        [Description("If enabled, sucessful compilation that produces warnings will show a warning icon.")]
+        public bool ShowWarnings
+        {
+            get { return mShowWarnings; }
+            set { mShowWarnings = value; }
+        }
     }
 }

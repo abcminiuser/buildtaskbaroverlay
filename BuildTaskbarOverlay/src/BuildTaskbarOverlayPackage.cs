@@ -4,6 +4,7 @@ using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.WindowsAPICodePack.Taskbar;
+using EnvDTE80;
 
 namespace FourWalledCubicle.BuildTaskbarOverlay
 {
@@ -101,9 +102,37 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
             mWindowsTaskBar.SetProgressState(TaskbarProgressBarState.NoProgress);
 
             if (mBuildError)
+            {
                 mWindowsTaskBar.SetOverlayIcon(IconTheme.IconBuildFail(mSettings.Theme), "Build Failed");
+            }
             else
-                mWindowsTaskBar.SetOverlayIcon(IconTheme.IconBuildOK(mSettings.Theme), "Build Successful");
+            {
+                bool buildWarnings = false;
+
+                if (mSettings.ShowWarnings)
+                {
+                    try
+                    {
+                        ErrorItems errorList = (mDTE as EnvDTE80.DTE2).ToolWindows.ErrorList.ErrorItems;
+                        for (int i = 1; i <= errorList.Count; i++)
+                        {
+                            ErrorItem e = errorList.Item(i);
+
+                            if (e.ErrorLevel == vsBuildErrorLevel.vsBuildErrorLevelMedium)
+                            {
+                                buildWarnings = true;
+                                break;
+                            }
+                        }
+                    }
+                    catch { }
+                }
+
+                if (buildWarnings)
+                    mWindowsTaskBar.SetOverlayIcon(IconTheme.IconBuildWarning(mSettings.Theme), "Build Successful with Warnings");
+                else
+                    mWindowsTaskBar.SetOverlayIcon(IconTheme.IconBuildOK(mSettings.Theme), "Build Successful");
+            }
         }
     }
 }
