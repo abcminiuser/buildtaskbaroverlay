@@ -123,9 +123,7 @@
     <Compile Include="Guids.cs" />
     <Compile Include="src\EnumDescriptionConverter.cs" />
     <Compile Include="src\IconTheme.cs" />
-    <Compile Include="src\OptionsPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="src\OptionsPage.cs" />
     <Compile Include="Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

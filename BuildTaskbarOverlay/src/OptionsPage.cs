@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.Shell;
 
 namespace FourWalledCubicle.BuildTaskbarOverlay
 {
+    [System.ComponentModel.DesignerCategory("")]
     public class OptionsPage : DialogPage
     {
         private IconTheme.IconThemes mIconTheme = IconTheme.IconThemes.ICON_THEME_1;
