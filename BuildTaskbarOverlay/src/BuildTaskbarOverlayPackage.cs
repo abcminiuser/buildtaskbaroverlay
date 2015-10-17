@@ -13,7 +13,7 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
     [ProvideOptionPageAttribute(typeof(OptionsPage), "Extensions", "Icon Taskbar Overlay", 15600, 1912, true)]
     [Guid(GuidList.guidBuildTaskbarOverlayPkgString)]
     [ProvideAutoLoad(UIContextGuids.NoSolution)]
-    public sealed class BuildTaskbarOverlayPackage : Package
+    public sealed class BuildTaskbarOverlayPackage : Package, IDisposable
     {
         private readonly DTE mDTE;
         private readonly SolutionEvents mSolutionEvents;
@@ -43,6 +43,11 @@ namespace FourWalledCubicle.BuildTaskbarOverlay
                 mBuildEvents.OnBuildDone += new _dispBuildEvents_OnBuildDoneEventHandler(mBuildEvents_OnBuildDone);
             }
             catch {}
+        }
+
+        public void Dispose()
+        {
+            mSettings.Dispose();
         }
 
         protected override void Initialize()
